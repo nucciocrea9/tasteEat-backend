@@ -51,7 +51,7 @@ module "storage" {
    providers = {
     aws = "aws"
   }
-  //region = var.region
+  
 
 }
 
@@ -68,14 +68,7 @@ module "database" {
   source = "./database"
   
 }
-/*
-module "database_west" {
-  source= "./database"
-  providers = {
-    aws = "aws.us-west-1"
-  }
-}
-*/
+
 
 resource "random_string" "id" {
   length  = 6
