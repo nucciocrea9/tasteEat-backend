@@ -21,8 +21,7 @@ output "BUCKET_NAME" {
 output "REGION" {
   value = var.region
 }
-##TODO: remove
-# they still exist for the direct production of the .env file for react
+
 output "SIGNIN_REDIRECT_URL" {
   value = local.website
 }

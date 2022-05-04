@@ -10,12 +10,11 @@ resource "aws_cognito_identity_pool" "identities_pool" {
   }
 }
 
-
 # aws_cognito_identity_pool_roles_attachment.identities_pool_roles:
 resource "aws_cognito_identity_pool_roles_attachment" "identities_pool_roles" {
   identity_pool_id = aws_cognito_identity_pool.identities_pool.id
   roles = {
-    "authenticated"   = var.authenticated_role
+    "authenticated" = var.authenticated_role
     //aws_iam_role.authenticated.arn
     "unauthenticated" = var.unauthenticated_role
     //aws_iam_role.unauthenticated.arn

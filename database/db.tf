@@ -10,10 +10,10 @@ provider "aws" {
 }
 resource "aws_dynamodb_table" "us-east-1" {
   provider = aws.us-east-1
-  //source="terraform-aws-modules/dynamodb-table/aws"
-  name= "recipes"
-  hash_key="recipe_id"
-  range_key="recipe_name"
+
+  name           = "recipes"
+  hash_key       = "recipe_id"
+  range_key      = "recipe_name"
   read_capacity  = 20
   write_capacity = 20
   billing_mode   = "PROVISIONED"
@@ -21,7 +21,7 @@ resource "aws_dynamodb_table" "us-east-1" {
     name = "recipe_id"
     type = "N"
   }
-attribute {
+  attribute {
     name = "recipe_name"
     type = "S"
   }
@@ -29,10 +29,10 @@ attribute {
 
 resource "aws_dynamodb_table" "us-west-1" {
   provider = aws.us-west-1
-  //source="terraform-aws-modules/dynamodb-table/aws"
-  name= "recipes"
-  hash_key="recipe_id"
-  range_key="recipe_name"
+
+  name           = "recipes"
+  hash_key       = "recipe_id"
+  range_key      = "recipe_name"
   billing_mode   = "PROVISIONED"
   read_capacity  = 20
   write_capacity = 20
@@ -40,7 +40,7 @@ resource "aws_dynamodb_table" "us-west-1" {
     name = "recipe_id"
     type = "N"
   }
-attribute {
+  attribute {
     name = "recipe_name"
     type = "S"
   }

@@ -1,18 +1,18 @@
 resource "aws_cloudfront_origin_access_identity" "website" {
   comment = "Why we even need this?"
- 
+
 }
 
 
 resource "aws_cloudfront_distribution" "website" {
-    
+
   origin {
     domain_name = aws_s3_bucket.hosting.bucket_regional_domain_name
     origin_id   = var.s3_origin_id
-  
-  s3_origin_config {
-    origin_access_identity =  aws_cloudfront_origin_access_identity.website.cloudfront_access_identity_path
-  }
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.website.cloudfront_access_identity_path
+    }
   }
 
   enabled             = true
@@ -27,23 +27,23 @@ resource "aws_cloudfront_distribution" "website" {
       query_string = false
 
       cookies {
-        forward= "none"
+        forward = "none"
       }
     }
-    
+
     viewer_protocol_policy = "allow-all"
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
   }
 
-    restrictions {
+  restrictions {
     geo_restriction {
       restriction_type = "none"
     }
   }
 
-     viewer_certificate {
+  viewer_certificate {
     cloudfront_default_certificate = true
   }
 }
