@@ -61,6 +61,7 @@ module "iam" {
 }
 module "storage" {
   source = "./storage"
+  cognitoRole = module.iam.authenticated_role
   providers = {
     aws = "aws"
   }
@@ -70,6 +71,7 @@ module "storage" {
 
 module "storage_west" {
   source = "./storage"
+  cognitoRole = module.iam.authenticated_role
   providers = {
     aws = "aws.us-west-1"
   }

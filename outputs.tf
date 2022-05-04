@@ -3,7 +3,7 @@ output "USER_POOL_ID" {
 }
 
 output "USER_POOL_SUBDOMAIN" {
-  value = local.user_pool_domain
+  value = "taste-user-pool-${random_string.id.result}"
 }
 
 output "CLIENT_ID" {
@@ -23,15 +23,15 @@ output "REGION" {
 }
 
 output "SIGNIN_REDIRECT_URL" {
-  value = local.website
+  value = module.website.domain_name
 }
 
 output "SIGNOUT_REDIRECT_URL" {
-  value = local.website
+  value = module.website.domain_name
 }
 ###
 output "WEBSITE_URL" {
-  value = local.website
+  value = module.website.domain_name
 }
 
 output "HOSTING_BUCKET" {
