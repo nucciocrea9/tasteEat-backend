@@ -83,7 +83,7 @@ resource "aws_cognito_user_group" "group" {
   user_pool_id = aws_cognito_user_pool.users_pool.id
   description  = "Managed by Terraform"
   precedence   = 42
-  role_arn     = aws_iam_role.authenticated.arn
+  role_arn     = var.authenticated_role
 }
 
 resource "aws_cognito_user_pool_domain" "main" {
@@ -101,8 +101,6 @@ resource "aws_cognito_user_pool_client" "web_client" {
   allowed_oauth_scopes = [
     "email",
     "openid",
-    "phone",
-    "profile"
   ]
   callback_urls          = [var.website]
   refresh_token_validity = 30
