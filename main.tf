@@ -77,6 +77,10 @@ module "storage_west" {
   }
 
 }
+module "api" {
+  source = "./API"
+  user_pool_arn = module.authorization.user_pool_arn 
+}
 
 
 module "database" {
