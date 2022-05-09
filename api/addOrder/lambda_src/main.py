@@ -12,8 +12,7 @@ def lambda_handler(event, context):
     recordId = str(uuid.uuid4())
     date_format='%d/%m/%Y'
     date_format1='%A'
-    #IST = dateutil.tz.gettz('Europe/Dublin')
-    #time= (datetime.now(tz=IST)+timedelta(days=2)).strftime(date_format)
+   
     day= (datetime.now()+timedelta(days=1)).strftime(date_format1)
     orderTimestamp= (datetime.now()+timedelta(days=0)).strftime(date_format)
     expiration= (datetime.now()+timedelta(days=2)).strftime(date_format)
@@ -23,7 +22,8 @@ def lambda_handler(event, context):
     
     #Creating new record in DynamoDB table
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('')
+    table_name=os.environ['table']
+    table = dynamodb.Table(table_name)
     put_item=table.put_item(
         Item={
             'order_id' : recordId,

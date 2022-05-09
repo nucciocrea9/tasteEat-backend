@@ -38,7 +38,11 @@ resource "aws_lambda_function" "function" {
   publish       = true
   role          = aws_iam_role.iam_for_lambda.arn
   timeout = 30
-
+   environment {
+    variables = {
+      table = var.db_table
+    }
+  }
   //source_path = "${path.module}/lambda_src"
 
  // store_on_s3 = false

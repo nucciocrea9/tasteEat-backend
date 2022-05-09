@@ -1,13 +1,14 @@
 import json
 import boto3
+import os
 
 client = boto3.client('dynamodb')
 
 def lambda_handler(event, context):
     # Set the default error response
     
-
-    scan_result = client.scan(TableName='')['Items']
+    table=os.environ['table']
+    scan_result = client.scan(TableName=table)['Items']
 
     posts = []
 

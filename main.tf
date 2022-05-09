@@ -60,7 +60,7 @@ module "iam" {
   identity_pool_id_west = module.authorization-west.identity_pool
 }
 module "storage" {
-  source = "./storage"
+  source      = "./storage"
   cognitoRole = module.iam.authenticated_role
   providers = {
     aws = "aws"
@@ -70,7 +70,7 @@ module "storage" {
 }
 
 module "storage_west" {
-  source = "./storage"
+  source      = "./storage"
   cognitoRole = module.iam.authenticated_role
   providers = {
     aws = "aws.us-west-1"
@@ -78,14 +78,24 @@ module "storage_west" {
 
 }
 module "api" {
-  source = "./API"
-  user_pool_arn = module.authorization.user_pool_arn 
+  source        = "./API"
+  user_pool_arn = module.authorization.user_pool_arn
+  db_table      = module.database.table_name
+  db_table_order=module.database.table_name_order
 }
 
 
 module "database" {
   source = "./database"
-
+  providers = {
+    aws = "aws"
+  }
+}
+module "database-west" {
+  source = "./database"
+  providers = {
+    aws = "aws.us-west-1"
+  }
 }
 resource "random_string" "id-west" {
   length  = 6

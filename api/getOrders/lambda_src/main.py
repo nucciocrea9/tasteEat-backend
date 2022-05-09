@@ -1,11 +1,13 @@
 import boto3
 import json
+import os
 from boto3.dynamodb.conditions import Key
 
 def lambda_handler(event,context):
     
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('')  
+    table_name=os.environ['table']
+    table = dynamodb.Table(table_name)  
     user=  event['requestContext']['authorizer']['claims']['email']
     
     resp= table.scan(
