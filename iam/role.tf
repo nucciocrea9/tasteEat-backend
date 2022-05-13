@@ -59,3 +59,44 @@ resource "aws_iam_role" "unauthenticated" {
   name                  = "tasteEat_idp_Unauth_role"
   tags                  = {}
 }
+
+resource "aws_iam_role" "iam_for_lambda" {
+  name = "iam_for_lambda"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "lambda.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
+resource "aws_iam_policy" "lambda_dyndb_update_item_userpool_get_user" {
+  name = "lambda_dyndb_policy"
+  policy = jsonencode(
+    {
+      Version = "2012-10-17"
+      Statement = [
+        {
+          Action   = ["dynamodb:*"]
+          Effect   = "Allow"
+          Resource = "*"
+        },
+      ]
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_dyndb_update_item_userpool_get_user" {
+  role       = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.lambda_dyndb_update_item_userpool_get_user.arn
+}

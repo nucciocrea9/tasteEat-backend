@@ -182,6 +182,7 @@ module "share_docs_method" {
   parent_resource_path   = aws_api_gateway_resource.getRecipes.path
   share_doc_http_method  = aws_api_gateway_method.getRecipes_method.http_method
   db_table= var.db_table
+  lambda_role= var.lambda_role
 }
 
 module "share_docs_method1" {
@@ -190,6 +191,7 @@ module "share_docs_method1" {
   parent_resource_path   = aws_api_gateway_resource.getOrders.path
   share_doc_http_method  = aws_api_gateway_method.getOrders_method.http_method
   db_table_order= var.db_table_order
+  lambda_role= var.lambda_role
 }
 
 module "share_docs_method2" {
@@ -198,6 +200,7 @@ module "share_docs_method2" {
   parent_resource_path   = aws_api_gateway_resource.order.path
   share_doc_http_method  = aws_api_gateway_method.order_method.http_method
   db_table_order= var.db_table_order
+  lambda_role= var.lambda_role
 }
 resource "aws_api_gateway_stage" "dev" {
   deployment_id = aws_api_gateway_deployment.tasteApi.id

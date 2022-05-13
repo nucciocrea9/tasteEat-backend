@@ -82,8 +82,22 @@ module "api" {
   user_pool_arn = module.authorization.user_pool_arn
   db_table      = module.database.table_name
   db_table_order=module.database.table_name_order
+  lambda_role= module.iam.lambda_role
+  providers = {
+    aws = "aws"
+  }
 }
 
+module "api-west" {
+  source        = "./API"
+  user_pool_arn = module.authorization-west.user_pool_arn
+  db_table      = module.database-west.table_name
+  db_table_order=module.database-west.table_name_order
+  lambda_role= module.iam.lambda_role
+  providers = {
+    aws = "aws.us-west-1"
+  }
+}
 
 module "database" {
   source = "./database"
