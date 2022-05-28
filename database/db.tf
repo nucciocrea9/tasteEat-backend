@@ -26,7 +26,7 @@ resource "aws_dynamodb_table" "order" {
   billing_mode   = "PROVISIONED"
   attribute {
     name = "order_id"
-    type = "N"
+    type = "S"
   }
   attribute {
     name = "user"

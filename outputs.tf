@@ -1,4 +1,4 @@
-output "USER_POOL_ID" {
+output "UserPoolId" {
   value = module.authorization.user_pool
 }
 
@@ -6,27 +6,27 @@ output "USER_POOL_SUBDOMAIN" {
   value = "taste-user-pool-${random_string.id.result}"
 }
 
-output "CLIENT_ID" {
+output "ClientId" {
   value = module.authorization.client_id
 }
 
-output "IDENTITY_POOL_ID" {
+output "IdentityPoolId" {
   value = module.authorization.identity_pool
 }
 
-output "BUCKET_NAME" {
+output "bucket" {
   value = module.storage.bucket.bucket
 }
 
-output "REGION" {
+output "region" {
   value = var.region
 }
 
-output "SIGNIN_REDIRECT_URL" {
+output "RedirectUriSignIn" {
   value = "https://${module.website.domain_name}/"
 }
 
-output "SIGNOUT_REDIRECT_URL" {
+output "RedirectUriSignOut" {
   value = "https://${module.website.domain_name}/"
 }
 ###
@@ -78,4 +78,12 @@ output "WEBSITE_URL_west" {
 
 output "HOSTING_BUCKET_west" {
   value = module.website-west.hosting_bucket
+}
+
+output "apiUrl" {
+  value= module.api.endpoint_url
+}
+
+output "apiUrl_west" {
+  value= module.api-west.endpoint_url
 }
